@@ -1,4 +1,4 @@
-package com.rishiproject.job.domain;
+package com.rishiproject.job.domain.Enums;
 
 public enum UserStatus {
     ACTIVE,

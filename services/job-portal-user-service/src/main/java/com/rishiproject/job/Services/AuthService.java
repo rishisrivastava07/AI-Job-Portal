@@ -1,17 +1,15 @@
 package com.rishiproject.job.Services;
 
-import com.rishiproject.job.Modals.Mapper.UserMapper;
-import com.rishiproject.job.Modals.Payload.AuthResponse;
-import com.rishiproject.job.Modals.Payload.LoginRequest;
-import com.rishiproject.job.Modals.Payload.SignupRequest;
-import com.rishiproject.job.Modals.Users.User;
+import com.rishiproject.job.Models.Mapper.UserMapper;
+import com.rishiproject.job.Models.Payload.AuthResponse;
+import com.rishiproject.job.Models.Payload.LoginRequest;
+import com.rishiproject.job.Models.Payload.SignupRequest;
+import com.rishiproject.job.Models.Users.User;
 import com.rishiproject.job.Repositories.IUserRepository;
 import com.rishiproject.job.Securities.CustomUserDetailService;
 import com.rishiproject.job.Securities.JwtProvider;
 import com.rishiproject.job.Services.Interfaces.IAuthService;
-import com.rishiproject.job.domain.UserRole;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+import com.rishiproject.job.domain.Enums.UserRole;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

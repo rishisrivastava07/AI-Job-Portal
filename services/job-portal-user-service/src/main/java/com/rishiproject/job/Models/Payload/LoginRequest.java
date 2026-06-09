@@ -1,4 +1,4 @@
-package com.rishiproject.job.Modals.Payload;
+package com.rishiproject.job.Models.Payload;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

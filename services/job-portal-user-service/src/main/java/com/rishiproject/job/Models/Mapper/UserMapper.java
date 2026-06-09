@@ -1,6 +1,6 @@
-package com.rishiproject.job.Modals.Mapper;
+package com.rishiproject.job.Models.Mapper;
 
-import com.rishiproject.job.Modals.Users.User;
+import com.rishiproject.job.Models.Users.User;
 import com.rishiproject.job.dto.Response.UserResponse;
 
 import java.util.List;

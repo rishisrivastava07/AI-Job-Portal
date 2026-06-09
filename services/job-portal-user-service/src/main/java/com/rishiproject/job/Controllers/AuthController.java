@@ -1,8 +1,8 @@
 package com.rishiproject.job.Controllers;
 
-import com.rishiproject.job.Modals.Payload.AuthResponse;
-import com.rishiproject.job.Modals.Payload.LoginRequest;
-import com.rishiproject.job.Modals.Payload.SignupRequest;
+import com.rishiproject.job.Models.Payload.AuthResponse;
+import com.rishiproject.job.Models.Payload.LoginRequest;
+import com.rishiproject.job.Models.Payload.SignupRequest;
 import com.rishiproject.job.Services.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

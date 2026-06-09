@@ -1,8 +1,8 @@
 package com.rishiproject.job.Controllers;
 
-import com.rishiproject.job.Modals.Mapper.UserMapper;
-import com.rishiproject.job.Modals.Users.UpdatedUserProfileRequest;
-import com.rishiproject.job.Modals.Users.User;
+import com.rishiproject.job.Models.Mapper.UserMapper;
+import com.rishiproject.job.Models.Users.UpdatedUserProfileRequest;
+import com.rishiproject.job.Models.Users.User;
 import com.rishiproject.job.Services.UserService;
 import com.rishiproject.job.dto.Response.UserResponse;
 import jakarta.validation.Valid;

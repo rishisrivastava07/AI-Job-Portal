@@ -1,4 +1,4 @@
-package com.rishiproject.job.Modals.Users;
+package com.rishiproject.job.Models.Users;
 
 import lombok.Data;
 

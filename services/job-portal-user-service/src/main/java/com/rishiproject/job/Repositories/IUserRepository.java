@@ -1,6 +1,6 @@
 package com.rishiproject.job.Repositories;
 
-import com.rishiproject.job.Modals.Users.User;
+import com.rishiproject.job.Models.Users.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IUserRepository extends JpaRepository<User, Long> {

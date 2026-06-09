@@ -1,6 +1,6 @@
-package com.rishiproject.job.Modals.Payload;
+package com.rishiproject.job.Models.Payload;
 
-import com.rishiproject.job.domain.UserRole;
+import com.rishiproject.job.domain.Enums.UserRole;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

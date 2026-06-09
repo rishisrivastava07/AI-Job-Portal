@@ -1,7 +1,7 @@
-package com.rishiproject.job.Modals.Users;
+package com.rishiproject.job.Models.Users;
 
-import com.rishiproject.job.domain.UserRole;
-import com.rishiproject.job.domain.UserStatus;
+import com.rishiproject.job.domain.Enums.UserRole;
+import com.rishiproject.job.domain.Enums.UserStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;

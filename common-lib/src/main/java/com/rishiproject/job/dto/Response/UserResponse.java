@@ -1,7 +1,7 @@
 package com.rishiproject.job.dto.Response;
 
-import com.rishiproject.job.domain.UserRole;
-import com.rishiproject.job.domain.UserStatus;
+import com.rishiproject.job.domain.Enums.UserRole;
+import com.rishiproject.job.domain.Enums.UserStatus;
 import lombok.Data;
 
 import java.time.LocalDateTime;

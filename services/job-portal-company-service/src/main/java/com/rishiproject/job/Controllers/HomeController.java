@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HomeController {
 
     @GetMapping
-    public String HomeController()
-    {
-        return "Home Controller for - User Service - " + UserRole.ROLE_ADMIN;
+    public String home(){
+        return "Home Controller for - Company Service - " + UserRole.ROLE_EMPLOYER;
     }
 }

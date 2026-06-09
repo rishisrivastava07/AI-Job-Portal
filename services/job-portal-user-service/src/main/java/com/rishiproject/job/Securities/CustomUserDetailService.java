@@ -1,6 +1,6 @@
 package com.rishiproject.job.Securities;
 
-import com.rishiproject.job.Modals.Users.User;
+import com.rishiproject.job.Models.Users.User;
 import com.rishiproject.job.Repositories.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;

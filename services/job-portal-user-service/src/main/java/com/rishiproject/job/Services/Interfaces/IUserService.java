@@ -1,7 +1,7 @@
 package com.rishiproject.job.Services.Interfaces;
 
-import com.rishiproject.job.Modals.Users.UpdatedUserProfileRequest;
-import com.rishiproject.job.Modals.Users.User;
+import com.rishiproject.job.Models.Users.UpdatedUserProfileRequest;
+import com.rishiproject.job.Models.Users.User;
 import com.rishiproject.job.dto.Response.UserResponse;
 
 import java.util.List;

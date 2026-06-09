@@ -1,4 +1,4 @@
-package com.rishiproject.job.Modals.Payload;
+package com.rishiproject.job.Models.Payload;
 
 import com.rishiproject.job.dto.Response.UserResponse;
 import lombok.Data;

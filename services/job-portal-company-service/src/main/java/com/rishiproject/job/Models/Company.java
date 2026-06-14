@@ -66,7 +66,8 @@ public class Company {
     @Column(nullable = false)
     private Long ownerId;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Builder.Default
     private List<SocialLink> socialLinksList = new ArrayList<>();
 
     private Boolean isActive = true;

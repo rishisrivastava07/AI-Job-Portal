@@ -51,7 +51,7 @@ public class CompanyController {
     @PutMapping("/{companyId}/update")
     public ResponseEntity<CompanyResponse> updateCompany(@RequestHeader ("X-User-Id") Long ownerId, @PathVariable Long companyId, @RequestBody @Valid CompanyRequest req) throws Exception {
         return ResponseEntity.status(HttpStatus.OK)
-                .body(companyService.updateCompany(ownerId, companyId, req));
+                .body(companyService.updateCompany(companyId, ownerId, req));
     }
 
     @PatchMapping("/{companyId}/verify")

@@ -25,7 +25,6 @@ import static com.rishiproject.job.Mapper.CompanyMapper.mapSocialLinks;
 public class CompanyService implements ICompanyService {
 
     private final ICompanyRepository companyRepository;
-    private final ICompanyService iCompanyService;
 
     @Override
     public CompanyResponse createCompany(Long ownerId, CompanyRequest req) throws Exception {

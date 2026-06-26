@@ -50,7 +50,7 @@ public class JobRequest {
     @DecimalMin(value = "0.0", inclusive = true, message = "Max salary must not be negative")
     private BigDecimal maxSalary;
 
-//    private String currency;
+    private String currency;
 //    private SalaryPeriod salaryPeriod;
 //    private Boolean salaryNegotiable;
 //    private Boolean salaryDisclosed;

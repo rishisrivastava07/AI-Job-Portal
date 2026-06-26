@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface IJobService {
     JobResponse createJob(Long employerId, JobRequest jobRequest);
-    JobRequest getJobById(Long id);
+    JobResponse getJobById(Long id) throws Exception;
     List<JobResponse> getJobs(JobSearchRequest jobSearchRequest);
     List<JobResponse> getJobsByCompany(Long companyId);
 
@@ -17,6 +17,6 @@ public interface IJobService {
     JobResponse closeJob(Long jobId, Long employerId);
     JobResponse deleteJob(Long jobId, Long employerId);
 
-//    void incrementApplicationCount(Long jobId);
+    // void incrementApplicationCount(Long jobId);
     List<JobResponse> getAllJobsAdmin();
 }

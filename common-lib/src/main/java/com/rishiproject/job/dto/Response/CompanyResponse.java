@@ -4,12 +4,17 @@ import com.rishiproject.job.domain.Enums.CompanySize;
 import com.rishiproject.job.domain.Enums.CompanyStatus;
 import com.rishiproject.job.domain.Enums.CompanyType;
 import com.rishiproject.job.domain.Enums.IndustryType;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class CompanyResponse {
     private Long id;
     private String name;

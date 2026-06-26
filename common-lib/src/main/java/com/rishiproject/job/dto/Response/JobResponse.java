@@ -16,6 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Data
 public class JobResponse {
     private Long id;
     private String title;
@@ -24,7 +25,7 @@ public class JobResponse {
     private String responsibilities;
     private String benefits;
 
-    private CompanySummaryResponse company;
+    private CompanyResponse company;
     private Long employerId;
 
 //    private JobCategoryResponse category;

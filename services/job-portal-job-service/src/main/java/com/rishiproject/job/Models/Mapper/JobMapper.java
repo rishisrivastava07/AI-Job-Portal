@@ -18,7 +18,7 @@ public class JobMapper {
                 .responsibilities(job.getResponsibilities())
                 .benefits(job.getBenefits())
                 .company(companyResponse)
-                //.employerId(job.getEmployerId())
+                .employerId(job.getEmployerId())
                 //.category(maptoCategoryResponse(category))
                 //.skills(skills)
                 //.tags(tags)

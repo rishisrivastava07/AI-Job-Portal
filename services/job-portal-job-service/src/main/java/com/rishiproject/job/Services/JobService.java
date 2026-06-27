@@ -8,12 +8,14 @@ import com.rishiproject.job.Models.Payload.JobSearchRequest;
 import com.rishiproject.job.Repositories.IJobRepository;
 import com.rishiproject.job.Repositories.JobSpecifications;
 import com.rishiproject.job.Services.Interfaces.IJobService;
+import com.rishiproject.job.domain.Enums.JobStatus;
 import com.rishiproject.job.dto.Request.JobRequest;
 import com.rishiproject.job.dto.Response.CompanyResponse;
 import com.rishiproject.job.dto.Response.JobResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,6 +36,7 @@ public class JobService implements IJobService {
                 .responsibilities(jobRequest.getResponsibilities())
                 .benefits(jobRequest.getBenefits())
                 .companyId(companyId)
+                .employerId(employerId)
 //                .category(category)
 //                .skills(skills)
 //                .tags(tags)
@@ -47,8 +50,7 @@ public class JobService implements IJobService {
                 .expiresAt(jobRequest.getExpiresAt())
                 .build();
 
-        Job savedJob = jobRepository.save(newJob);
-        return convertToResponse(savedJob);
+        return convertToResponse(jobRepository.save(newJob));
     }
 
     private JobResponse convertToResponse(Job savedJob) {
@@ -104,27 +106,97 @@ public class JobService implements IJobService {
     }
 
     @Override
-    public JobResponse updateJob(Long jobId, Long employerId, JobRequest jobRequest) {
-        return null;
+    public JobResponse updateJob(Long jobId, Long employerId, JobRequest jobRequest) throws Exception {
+        Job job = jobRepository.findById(jobId).orElseThrow(
+                () -> new Exception("Job not found")
+        );
+
+        assertEmployer(job, employerId);
+
+        job.setTitle(jobRequest.getTitle());
+        job.setDescription(jobRequest.getDescription());
+        job.setBenefits(jobRequest.getBenefits());
+        job.setRequirements(jobRequest.getRequirements());
+        job.setResponsibilities(jobRequest.getResponsibilities());
+
+        // todo - implement this still not implemented
+
+        //  job.setSkills(jobRequest.getSkills());
+        //  job.setCategory(jobRequest.getCategory());
+        // job.setTags(jobRequest.getTags());
+
+        job.setLocation(buildLocation(jobRequest));
+        job.setRange(buildSalaryRange(jobRequest));
+        job.setType(jobRequest.getJobType());
+        job.setWorkMode(jobRequest.getWorkMode());
+        job.setExperinceLevel(jobRequest.getExperinceLevel());
+        job.setOpenings(jobRequest.getOpenings() != null ? jobRequest.getOpenings() : job.getOpenings());
+        job.setApplicationDeadline(jobRequest.getApplicationDeadline());
+        job.setExpiresAt(jobRequest.getExpiresAt());
+
+        return convertToResponse(jobRepository.save(job));
     }
 
     @Override
-    public JobResponse publishJob(Long jobId, Long employerId) {
-        return null;
+    public JobResponse publishJob(Long jobId, Long employerId) throws Exception {
+        Job job = jobRepository.findById(jobId).orElseThrow(
+                () -> new Exception("Job not found")
+        );
+
+        assertEmployer(job, employerId);
+        if(job.getStatus() == JobStatus.CLOSED || job.getStatus() == JobStatus.EXPIRED){
+            throw new Exception("Job is already closed or expired");
+        }
+        job.setStatus(JobStatus.OPEN);
+        job.setPublishedAt(LocalDateTime.now());
+        job.setIsActive(true);
+
+        return convertToResponse(jobRepository.save(job));
+    }
+
+    private void assertEmployer(Job job, Long employerId) throws Exception {
+        if(!job.getEmployerId().equals(employerId)){
+            throw new Exception("Not the employer who posted this job");
+        }
     }
 
     @Override
-    public JobResponse closeJob(Long jobId, Long employerId) {
-        return null;
+    public JobResponse closeJob(Long jobId, Long employerId) throws Exception {
+        Job job = jobRepository.findById(jobId).orElseThrow(
+                () -> new Exception("Job not found")
+        );
+
+        assertEmployer(job, employerId);
+        job.setStatus(JobStatus.CLOSED);
+        job.setClosedAt(LocalDateTime.now());
+        job.setIsActive(false);
+
+        return convertToResponse(jobRepository.save(job));
     }
 
     @Override
-    public JobResponse deleteJob(Long jobId, Long employerId) {
-        return null;
+    public void deleteJob(Long jobId, Long employerId) throws Exception {
+        Job job = jobRepository.findById(jobId).orElseThrow(
+                () -> new Exception("Job not found")
+        );
+
+        assertEmployer(job, employerId);
+
+        if(job.getStatus() == JobStatus.EXPIRED){
+            throw new Exception("Job is already expired");
+        }
+        job.setStatus(JobStatus.EXPIRED);
+        job.setClosedAt(LocalDateTime.now());
+        job.setIsActive(false);
+
+        jobRepository.delete(job);
     }
 
     @Override
     public List<JobResponse> getAllJobsAdmin() {
-        return List.of();
+        List<Job> jobs = jobRepository.findAll();
+        return jobs.stream().map(
+                this::convertToResponse
+        ).collect(Collectors.toList());
     }
 }

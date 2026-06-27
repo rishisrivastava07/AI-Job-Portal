@@ -12,10 +12,10 @@ public interface IJobService {
     List<JobResponse> getJobs(JobSearchRequest jobSearchRequest);
     List<JobResponse> getJobsByCompany(Long companyId);
 
-    JobResponse updateJob(Long jobId, Long employerId, JobRequest jobRequest);
-    JobResponse publishJob(Long jobId, Long employerId);
-    JobResponse closeJob(Long jobId, Long employerId);
-    JobResponse deleteJob(Long jobId, Long employerId);
+    JobResponse updateJob(Long jobId, Long employerId, JobRequest jobRequest) throws Exception;
+    JobResponse publishJob(Long jobId, Long employerId) throws Exception;
+    JobResponse closeJob(Long jobId, Long employerId) throws Exception;
+    void deleteJob(Long jobId, Long employerId) throws Exception;
 
     // void incrementApplicationCount(Long jobId);
     List<JobResponse> getAllJobsAdmin();

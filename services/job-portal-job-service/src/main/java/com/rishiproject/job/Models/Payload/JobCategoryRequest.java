@@ -18,4 +18,5 @@ public class JobCategoryRequest {
 
     private String iconUrl;
 
-    private Long parentId;}
+    private Long parentId;
+}

@@ -1,0 +1,27 @@
+package com.rishiproject.job.domain.Enums;
+
+public enum SkillCategory {
+    PROGRAMMING_LANGUAGE,
+    FRONTEND,
+    BACKEND,
+    MOBILE,
+    DATABASE,
+    CLOUD_PLATFORM,
+    DEVOPS,
+    VERSION_CONTROL,
+    API,
+    TESTING,
+    BUILD_TOOL,
+    DATA_ENGINEERING,
+    AI_ML,
+    BUSINESS_INTELLIGENCE,
+    DESIGN,
+    METHODOLOGY,
+    SOFT_SKILL,
+    OFFICE_TOOL,
+    LANGUAGE,
+    SECURITY,
+    ERP_CRM,
+    OPERATING_SYSTEM,
+    OTHER
+}

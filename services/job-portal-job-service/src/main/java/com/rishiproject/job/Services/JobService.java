@@ -3,6 +3,9 @@ package com.rishiproject.job.Services;
 import com.rishiproject.job.Models.Embeddable.JobLocation;
 import com.rishiproject.job.Models.Embeddable.SalaryRange;
 import com.rishiproject.job.Models.Job;
+import com.rishiproject.job.Models.JobCategory;
+import com.rishiproject.job.Models.JobSkill;
+import com.rishiproject.job.Models.JobTag;
 import com.rishiproject.job.Models.Mapper.JobMapper;
 import com.rishiproject.job.Models.Payload.JobSearchRequest;
 import com.rishiproject.job.Repositories.IJobRepository;
@@ -12,20 +15,34 @@ import com.rishiproject.job.domain.Enums.JobStatus;
 import com.rishiproject.job.dto.Request.JobRequest;
 import com.rishiproject.job.dto.Response.CompanyResponse;
 import com.rishiproject.job.dto.Response.JobResponse;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class JobService implements IJobService {
     private final IJobRepository jobRepository;
+    private final JobCategoryService jobCategoryService;
+    private final JobSkillService jobSkillService;
+    private final JobTagService jobTagService;
 
     @Override
-    public JobResponse createJob(Long employerId, JobRequest jobRequest) {
+    public JobResponse createJob(Long employerId, JobRequest jobRequest) throws Exception {
+        JobCategory category = jobCategoryService.getCategoryEntityById(jobRequest.getCategoryId());
+        Set<JobSkill> skills = jobRequest.getSkillsIds() != null ?
+                jobSkillService.getSkillsByIds(jobRequest.getSkillsIds()) : Collections.emptySet();
+        Set<JobTag> tags = jobRequest.getTagsIds() != null ?
+                jobTagService.getTagsByIds(jobRequest.getTagsIds()) : Collections.emptySet();
+
         // todo - fetch company by the employer id
         Long companyId = 1L;
 
@@ -37,9 +54,9 @@ public class JobService implements IJobService {
                 .benefits(jobRequest.getBenefits())
                 .companyId(companyId)
                 .employerId(employerId)
-//                .category(category)
-//                .skills(skills)
-//                .tags(tags)
+                .jobCategory(category)
+                .skills(skills)
+                .tags(tags)
                 .location(buildLocation(jobRequest))
                 .range(buildSalaryRange(jobRequest))
                 .type(jobRequest.getJobType())
@@ -47,7 +64,9 @@ public class JobService implements IJobService {
                 .experinceLevel(jobRequest.getExperinceLevel())
                 .openings(jobRequest.getOpenings() != null ? jobRequest.getOpenings() : 1)
                 .applicationDeadline(jobRequest.getApplicationDeadline())
+                .status(JobStatus.DRAFT)
                 .expiresAt(jobRequest.getExpiresAt())
+                .isActive(true)
                 .build();
 
         return convertToResponse(jobRepository.save(newJob));
@@ -110,8 +129,13 @@ public class JobService implements IJobService {
         Job job = jobRepository.findById(jobId).orElseThrow(
                 () -> new Exception("Job not found")
         );
-
         assertEmployer(job, employerId);
+
+        JobCategory jobCategory = jobCategoryService.getCategoryEntityById(jobRequest.getCategoryId());
+        Set<JobSkill> jobSkills = jobRequest.getSkillsIds() != null ?
+                jobSkillService.getSkillsByIds(jobRequest.getSkillsIds()) : Collections.emptySet();
+        Set<JobTag> jobTags = jobRequest.getSkillsIds() != null ?
+                jobTagService.getTagsByIds(jobRequest.getTagsIds()) : Collections.emptySet();
 
         job.setTitle(jobRequest.getTitle());
         job.setDescription(jobRequest.getDescription());
@@ -119,11 +143,9 @@ public class JobService implements IJobService {
         job.setRequirements(jobRequest.getRequirements());
         job.setResponsibilities(jobRequest.getResponsibilities());
 
-        // todo - implement this still not implemented
-
-        //  job.setSkills(jobRequest.getSkills());
-        //  job.setCategory(jobRequest.getCategory());
-        // job.setTags(jobRequest.getTags());
+        job.setSkills(jobSkills);
+        job.setJobCategory(jobCategory);
+        job.setTags(jobTags);
 
         job.setLocation(buildLocation(jobRequest));
         job.setRange(buildSalaryRange(jobRequest));

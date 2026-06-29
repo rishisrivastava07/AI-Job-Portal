@@ -21,7 +21,7 @@ public class JobSkillController {
     @PostMapping
     public ResponseEntity<JobSkillResponse> createCategory(@RequestBody @Valid JobSkillRequest jobSkillRequest) throws Exception {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(jobSkillService.createJobCSkill(jobSkillRequest));
+                .body(jobSkillService.createJobSkill(jobSkillRequest));
     }
 
     @GetMapping

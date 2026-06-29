@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface IJobSkillService {
-    JobSkillResponse createJobCSkill(JobSkillRequest request) throws Exception;
+    JobSkillResponse createJobSkill(JobSkillRequest request) throws Exception;
     List<JobSkillResponse> getAllSkills();
     JobSkillResponse getSkillById(Long id) throws Exception;
     JobSkillResponse updateSkill(Long id, JobSkillRequest request) throws Exception;

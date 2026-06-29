@@ -3,6 +3,8 @@ package com.rishiproject.job.dto.Request;
 import com.rishiproject.job.domain.Enums.ExperinceLevel;
 import com.rishiproject.job.domain.Enums.JobType;
 import com.rishiproject.job.domain.Enums.WorkMode;
+import com.rishiproject.job.dto.Response.JobSkillResponse;
+import com.rishiproject.job.dto.Response.JobTagResponse;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -11,6 +13,7 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -27,14 +30,14 @@ public class JobRequest {
     private String responsibilities;
     private String benefits;
 
-    @NotBlank(message = "Category is required")
+    @NotNull(message = "Category is required")
     private Long categoryId;
 
     /* Ids from the job_skills table */
-//    private Set<JobSkillResponse> skills;
+    private Set<Long> skillsIds;
 
     /* Ids from the job_tags table */
-//    private Set<JobTagResponse> tags;
+    private Set<Long> tagsIds;
 
     // Location
     private String address;

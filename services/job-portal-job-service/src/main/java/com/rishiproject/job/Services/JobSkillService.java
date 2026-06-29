@@ -21,7 +21,7 @@ public class JobSkillService implements IJobSkillService {
     private final IJobSkillRepository jobSkillRepository;
 
     @Override
-    public JobSkillResponse createJobCSkill(JobSkillRequest request) throws Exception {
+    public JobSkillResponse createJobSkill(JobSkillRequest request) throws Exception {
         if(jobSkillRepository.existsByName(request.getName())){
             throw new Exception("Skill name already exists");
         }
@@ -31,6 +31,7 @@ public class JobSkillService implements IJobSkillService {
                 .name(request.getName())
                 .slug(slug)
                 .skillCategory(request.getSkillCategory())
+                .isActive(true)
                 .build();
 
         JobSkill savedJobSkill = jobSkillRepository.save(jobSkill);

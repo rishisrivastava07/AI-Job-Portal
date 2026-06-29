@@ -1,8 +1,6 @@
 package com.rishiproject.job.Models.Payload;
 
-import com.rishiproject.job.domain.Enums.SkillCategory;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,12 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class JobSkillRequest {
-    @NotBlank(message = "Skill name is required")
+public class JobTagRequest {
+    @NotBlank(message = "Tag name is required")
     @Size(max = 100, message = "Name must not exceed 100 characters")
     private String name;
-
-    @NotNull(message = "Skill category is required")
-    private SkillCategory skillCategory;
-
 }

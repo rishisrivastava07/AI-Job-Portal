@@ -7,7 +7,7 @@ import com.rishiproject.job.dto.Response.JobResponse;
 import java.util.List;
 
 public interface IJobService {
-    JobResponse createJob(Long employerId, JobRequest jobRequest);
+    JobResponse createJob(Long employerId, JobRequest jobRequest) throws Exception;
     JobResponse getJobById(Long id) throws Exception;
     List<JobResponse> getJobs(JobSearchRequest jobSearchRequest);
     List<JobResponse> getJobsByCompany(Long companyId);

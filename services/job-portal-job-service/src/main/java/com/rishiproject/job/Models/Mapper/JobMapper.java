@@ -3,13 +3,24 @@ package com.rishiproject.job.Models.Mapper;
 import com.rishiproject.job.Models.Embeddable.JobLocation;
 import com.rishiproject.job.Models.Embeddable.SalaryRange;
 import com.rishiproject.job.Models.Job;
-import com.rishiproject.job.dto.Response.CompanyResponse;
-import com.rishiproject.job.dto.Response.JobResponse;
+import com.rishiproject.job.dto.Response.*;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class JobMapper {
     public static JobResponse mapToDto(Job job, CompanyResponse companyResponse){
         JobLocation loc = job.getLocation();
         SalaryRange sal = job.getRange();
+
+
+        JobCategoryResponse categories = job.getJobCategory() != null ?
+                JobCategoryMapper.mapToDto(job.getJobCategory(), false)  : null;
+        Set<JobSkillResponse> skills = job.getSkills() != null ?
+                job.getSkills().stream().map(JobSkillMapper::mapToDto).collect(Collectors.toSet()) : null;
+        Set<JobTagResponse> tags = job.getTags() != null ?
+                job.getTags().stream().map(JobTagMapper::mapToDto).collect(Collectors.toSet()) : null;
+
         return JobResponse.builder()
                 .id(job.getId())
                 .title(job.getTitle())
@@ -19,9 +30,9 @@ public class JobMapper {
                 .benefits(job.getBenefits())
                 .company(companyResponse)
                 .employerId(job.getEmployerId())
-                //.category(maptoCategoryResponse(category))
-                //.skills(skills)
-                //.tags(tags)
+                .category(categories)
+                .skills(skills)
+                .tags(tags)
 
                 //  Location
                 .address(loc != null ? loc.getAddress() : null)

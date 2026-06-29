@@ -12,6 +12,7 @@ public class JobSkillMapper {
                 .slug(jobSkill.getSlug())
                 .isActive(jobSkill.getIsActive())
                 .skillCategory(jobSkill.getSkillCategory())
+                .createdAt(jobSkill.getCreatedAt())
                 .build();
     }
 }

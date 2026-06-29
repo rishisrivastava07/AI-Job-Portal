@@ -12,7 +12,7 @@ public class JobCategoryMapper {
     public static JobCategoryResponse mapToDto(JobCategory jobCategory, boolean includeSubCategories){
 
         List<JobCategoryResponse> subCategories = null;
-        if(includeSubCategories) {
+        if(includeSubCategories && jobCategory.getSubCategories() != null) {
             subCategories = jobCategory.getSubCategories()
                     .stream().map(sub->mapToDto(sub, false))
                     .collect(Collectors.toList());

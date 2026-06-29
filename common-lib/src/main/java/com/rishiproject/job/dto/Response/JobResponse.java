@@ -28,9 +28,9 @@ public class JobResponse {
     private CompanyResponse company;
     private Long employerId;
 
-//    private JobCategoryResponse category;
-//    private Set<JobSkillResponse> skills;
-//    private Set<JobTagResponse> tags;
+    private JobCategoryResponse category;
+    private Set<JobSkillResponse> skills;
+    private Set<JobTagResponse> tags;
 
     // Location
     private String address;
@@ -44,7 +44,7 @@ public class JobResponse {
     private BigDecimal maxSalary;
     private String currency;
 
-//    private SalaryPeriod salaryPeriod;
+    //  private SalaryPeriod salaryPeriod;
     private Boolean salaryNegotiable;
     private Boolean salaryDisclosed;
 

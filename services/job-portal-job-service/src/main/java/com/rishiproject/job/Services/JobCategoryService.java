@@ -2,7 +2,6 @@ package com.rishiproject.job.Services;
 
 import com.rishiproject.job.Models.JobCategory;
 import com.rishiproject.job.Models.Mapper.JobCategoryMapper;
-import com.rishiproject.job.Models.Mapper.JobMapper;
 import com.rishiproject.job.Models.Payload.JobCategoryRequest;
 import com.rishiproject.job.Repositories.IJobCategoryRepository;
 import com.rishiproject.job.Services.Interfaces.IJobCategoryService;
@@ -33,8 +32,10 @@ public class JobCategoryService implements IJobCategoryService {
         String slug = generateUniqueSlug(request.getName());
         JobCategory jobCategory = JobCategory.builder()
                 .name(request.getName())
+                .slug(slug)
                 .description(request.getDescription())
                 .iconUrl(request.getIconUrl())
+                .isActive(true)
                 .parent(parent)
                 .build();
 
